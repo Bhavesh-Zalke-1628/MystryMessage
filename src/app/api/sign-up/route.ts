@@ -2,7 +2,6 @@ import dbConnect from "@/lib/dbconnect";
 import userModel from "@/model/User";
 import bcrypt from 'bcryptjs'
 import { sendVerificationEmail } from "@/helper/sendVerificationEmail";
-import { ifError } from "assert";
 import { date } from "zod";
 
 
@@ -11,7 +10,7 @@ export async function POST(request: Request) {
     await dbConnect();
     try {
         const { username, email, password } = await request.json()
-        const exitstingUserVerifiedByUsername = await userModel.findOne({ userName, isVerified: true })
+        const exitstingUserVerifiedByUsername = await userModel.findOne({ username, isVerified: true })
 
         if (exitstingUserVerifiedByUsername) {
             return Response.json({
