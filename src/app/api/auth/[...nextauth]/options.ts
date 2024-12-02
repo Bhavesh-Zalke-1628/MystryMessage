@@ -10,7 +10,7 @@ export const authOption: NextAuthOptions = {
             id: "credentials",
             name: "Credentials",
             credentials: {
-                identifier: { label: "Email or Username", type: "text" },
+                identifier: { label: "Email or username", type: "text" },
                 password: { label: "Password", type: "password" },
             },
             async authorize(credentials: any): Promise<any> {

@@ -1,5 +1,6 @@
 
 "use client"
+import { Button } from "@react-email/components"
 import { useSession, signIn, signOut } from "next-auth/react"
 function page() {
 
@@ -9,7 +10,7 @@ function page() {
         return (
             <div>
                 sign in page
-                <button onClick={() => signOut()}>Sign Out</button>
+                <Button onClick={() => signIn()} >Sign in </Button>
             </div>
         )
     } else {

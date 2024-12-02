@@ -10,12 +10,13 @@ export async function POST(request: Request) {
     await dbConnect();
     try {
         const { username, email, password } = await request.json()
-        const exitstingUserVerifiedByUsername = await userModel.findOne({ username, isVerified: true })
+        console.log(username, email, password)
+        const exitstingUserVerifiedByusername = await userModel.findOne({ username, isVerified: true })
 
-        if (exitstingUserVerifiedByUsername) {
+        if (exitstingUserVerifiedByusername) {
             return Response.json({
                 success: false,
-                message: "Username is already taken"
+                message: "username is already taken"
             },
                 {
                     status: 400
@@ -45,7 +46,7 @@ export async function POST(request: Request) {
 
 
             const newUser = new userModel({
-                userName: username,
+                username: username,
                 email,
                 password: hashPassword,
                 verifyCode: verifyCode,
@@ -61,7 +62,7 @@ export async function POST(request: Request) {
 
         const emailResponse = await sendVerificationEmail(email, username, verifyCode)
 
-        console.log(emailResponse)
+        // console.log(emailResponse)
 
         if (!emailResponse.success) {
             return Response.json({
